@@ -60,6 +60,6 @@ location.replace('http://bank.dreamhack.io/sendmoney?to=Dreamhack&amount=1337');
 
 # 3. 대응 방안
 
-## 3.1. Referrer 헤더 확인
+## 3.1. Referer 헤더 확인
 
 서버에서 사용자의 요청 내용에서 Referer 헤더를 확인하는 방법이 있다. Referer 헤더에는 요청을 보낸 직전 페이지의 URL이 담긴다. 예를 들면, https://test.com 과 https://qwer.com 이 존재하고 https://test.com 에서 CSRF 스크립트가 실행되어 https://qwer.com 쪽으로 요청을 보내게 된다고 하면, 요청 내용에서 Referer 헤더에는 요청이 시작된 https://test.com URL이 담기는 것이다. Referer 헤더의 이러한 특성을 이용해 Referer 헤더를 검증하여 CSRF를 방어한다. 하지만 이 방법은 Same Origin에서 발생하는 CSRF는 방어하기 어렵다는 단점이 존재한다.
