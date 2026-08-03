@@ -63,3 +63,7 @@ location.replace('http://bank.dreamhack.io/sendmoney?to=Dreamhack&amount=1337');
 ## 3.1. Referer 헤더 확인
 
 서버에서 사용자의 요청 내용에서 Referer 헤더를 확인하는 방법이 있다. Referer 헤더에는 요청을 보낸 직전 페이지의 URL이 담긴다. 예를 들면, https://test.com 과 https://qwer.com 이 존재하고 https://test.com 에서 CSRF 스크립트가 실행되어 https://qwer.com 쪽으로 요청을 보내게 된다고 하면, 요청 내용에서 Referer 헤더에는 요청이 시작된 https://test.com URL이 담기는 것이다. Referer 헤더의 이러한 특성을 이용해 Referer 헤더를 검증하여 CSRF를 방어한다. 하지만 이 방법은 Same Origin에서 발생하는 CSRF는 방어하기 어렵다는 단점이 존재한다.
+
+## 3.2. CSRF Token
+
+서버 측에서 사용자의 세션 또는 임의의 난수를 생성하고, 이를 사용자에 대한 응답 HTML 문서에 hidden 타입의 input 태그에 심어둔다. 그리고 서버 측으로 요청이 전달될 때, 파라미터 값으로 Token 값을 받아 서버 측에서 검증하고, 검증에 통과하면 해당 기능을 실행하도록 한다. 이 Token은 서버 측에서 생성되는 임의의 값으로 공격자가 알아내기 어렵기 때문에 공격자가 작성한 CSRF 스크립트에도 서버 측으로 보내는 요청에 Token 값을 포함한 요청을 보내도록 하는 스크립트를 작성할 수 없다. 그렇기 때문에 CSRF Token을 적용하면 공격자의 스크립트에 노출되더라도 기능이 실행되지 않고 검증에 의해 차단된다.
