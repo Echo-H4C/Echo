@@ -73,4 +73,4 @@ location.replace('http://bank.dreamhack.io/sendmoney?to=Dreamhack&amount=1337');
 
 - https://junhyunny.github.io/information/security/spring-boot/spring-security/cross-site-reqeust-forgery/
 
-- 
+- https://developer.mozilla.org/ko/docs/Web/HTTP/Reference/Headers/Referer
