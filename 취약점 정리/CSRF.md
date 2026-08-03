@@ -53,7 +53,8 @@ location.href = 'http://bank.dreamhack.io/sendmoney?to=Dreamhack&amount=1337';
 location.replace('http://bank.dreamhack.io/sendmoney?to=Dreamhack&amount=1337');
 ```
 
-> [!TIP] 
+> [!TIP]
+> XSS와 CSRF의 차이점
 
 
 
