@@ -54,6 +54,6 @@ location.replace('http://bank.dreamhack.io/sendmoney?to=Dreamhack&amount=1337');
 ```
 
 > [!TIP] XSS와 CSRF의 차이
-> 
+안녕
 
 # 3. 대응 방안
