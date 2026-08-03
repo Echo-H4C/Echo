@@ -36,7 +36,7 @@ CSRF 공격에 성공하기 위해서는 공격자가 작성한 악성 스크립
 
 그리고 Javascript를 사용하는 방법도 있다.
 
-```
+```javascript
 window.open('http://bank.dreamhack.io/sendmoney?to=Dreamhack&amount=1337');
 
 location.href = 'http://bank.dreamhack.io/sendmoney?to=Dreamhack&amount=1337';
