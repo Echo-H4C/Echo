@@ -34,7 +34,17 @@ CSRF 공격에 성공하기 위해서는 공격자가 작성한 악성 스크립
 <img src='http://bank.dreamhack.io/sendmoney?to=Dreamhack&amount=1337' width=0px height=0px>
 ```
 
-그리고 Javascript를 사용하는 방법도 있다.
+그리고 POST 요청을 받는 경우, 웹 페이지에 입력된 양식을 전송하는 form 태그를 사용하는 방법이 있다.
+
+```HTML
+<form action="https://test.dreamhack.io/users/1" method="post">
+	<input name="user">
+	<input name="pass">
+	<input name="submit">
+</form>
+```
+
+Javascript를 사용하는 방법도 있다.
 
 ```javascript
 window.open('http://bank.dreamhack.io/sendmoney?to=Dreamhack&amount=1337');
