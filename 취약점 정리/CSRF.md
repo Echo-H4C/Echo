@@ -58,5 +58,8 @@ location.replace('http://bank.dreamhack.io/sendmoney?to=Dreamhack&amount=1337');
 > 공통점은 두 개의 취약점 모두 클라이언트를 대상으로 하는 공격이며, 이용자가 악성 스크립트가 포함된 페이지에 접속하도록 유도해야 한다는 것이다.
 > 차이점은 공격 목적에 있다. XSS는 인증 정보인 세션 및 쿠키 탈취를 목적으로 하는 공격이며, 공격할 사이트의 오리진에서 스크립트를 실행한다. CSRF는 이용자가 임의 페이지에 HTTP 요청을 보내는 것을 목적으로 한다. 또한, 공격자는 악성 스크립트가 포함된 페이지에 접근한 이용자의 권한으로 웹 서비스의 임의 기능을 실행할 수 있다.
 
-
 # 3. 대응 방안
+
+## 3.1. Referrer 헤더 확인
+
+서버에서 사용자의 요청 내용에서 Referer 헤더를 확인하는 방법이 있다. Referer 헤더에는 요청을 보낸 직전 페이지의 URL이 담긴다. 예를 들면, https://test.com 과 https://qwer.com 이 존재하고 https://test.com 에서 CSRF 스크립트가 실행되어 https://qwer.com 쪽으로 요청을 보내게 된다고 하면, 요청 내용에서 Referer 헤더에는 요청이 시작된 https://test.com URL이 담기는 것이다. Referer 헤더의 이러한 특성을 이용해 Referer 헤더를 검증하여 CSRF를 방어한다. 하지만 이 방법은 Same Origin에서 발생하는 CSRF는 방어하기 어렵다는 단점이 존재한다.
