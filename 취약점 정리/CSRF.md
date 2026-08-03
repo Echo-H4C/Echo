@@ -53,6 +53,8 @@ location.href = 'http://bank.dreamhack.io/sendmoney?to=Dreamhack&amount=1337';
 location.replace('http://bank.dreamhack.io/sendmoney?to=Dreamhack&amount=1337');
 ```
 
+> [!TIP]
+
 > [!TIP] XSS와 CSRF의 차이
 > XSS와 CSRF는 스크립트를 웹 페이지에 작성해 공격한다는 점에서 매우 유사하다.
 > 공통점은 두 개의 취약점 모두 클라이언트를 대상으로 하는 공격이며, 이용자가 악성 스크립트가 포함된 페이지에 접속하도록 유도해야 한다는 것이다.
