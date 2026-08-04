@@ -42,3 +42,4 @@ Reflected XSS는 Stored XSS와는 다르게 URL과 같은 이용자의 요청에
 
 # 4. 참고
 - https://portswigger.net/web-security/cors/same-origin-policy
+- https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Fragment
