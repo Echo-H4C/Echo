@@ -32,6 +32,8 @@ UNION SQL Injection 취약점이 존재한다면 먼저 ' order by 1-- 쿼리문
 ' union select column_name from information_schema.columns WHERE table_name = '[TABLE_NAME]';-- 
 ```
 
+SQL Injection 및 기타 다양한 취약점의 payload 정보
 
+- https://github.com/swisskyrepo/PayloadsAllTheThings
 
 # 3. 대응방안
