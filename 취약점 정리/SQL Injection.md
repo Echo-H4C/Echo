@@ -100,6 +100,19 @@ SQL Injection을 방어하기 위해 존재하는 기능은 아니지만 그 기
 
 ## 3.3. ORM 적용
 
+ORM(Object-Relation Mapping)이란 객체(Object)와 관계형 데이터베이스(RDBMS)의 테이블을 자동으로 연결해주는 기술이다. 일반적으로 SQL 쿼리문을 서버에서 사용하는 방법은 실행시킬 쿼리문을 인자로 받아 실행시키는 방법이지만, ORM을 사용하면 DB 데이터를 객체처럼 다룰 수 있다.
+
+* 예시
+```
+- 일반적인 SQL 쿼리문 사용 방법
+cursor.execute("SELECT * FROM users WHERE id = " + user_id)
+
+- ORM을 사용한 방법
+User.objects.get(id=user_id)
+```
+
+PreparedStatement와 마찬가지로 SQL Injection 방어를 위한 기능은 아니지만, ORM은 기본적으로 PreparedStatement가 적용되어 있어 SQL Injection 방어에도 사용될 수 있다.
+
 다만, ORM도 공격 가능한 사례가 존재하므로 100퍼센트 방어할 수는 없다.
 
 - 참고 사례 : https://www.skshieldus.com/report/eqstInsight/rt2604.html (ORM Injection)
