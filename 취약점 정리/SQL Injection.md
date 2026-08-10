@@ -36,4 +36,22 @@ SQL Injection 및 기타 다양한 취약점의 payload 정보
 
 - https://github.com/swisskyrepo/PayloadsAllTheThings
 
+## 2.2. Blind SQL Injection
+
+쿼리문의 질의 실행 결과가 에러 메시지나 에러 코드 확인 등의 방법으로 확인되지 않으나 주입된 쿼리문이 실행된 결과가 참일 때와 거짓일 때의 사용자 측에 출력되는 결괏값이 가변된다고 판단되는 경우 발생할 가능성이 있다고 볼 수 있다. 위에서 살펴보았던 쿼리문처럼 조회하는 쿼리문을 직접적으로 주입하는 것이 아니라 조회된 결괏값의 일부와 특정 문자(예를 들면 알파벳이나 특수문자 등)를 비교하는 쿼리문을 주입하여 한 글자씩 알아내는 방법이 일반적이다.
+
+... 요약하면 그냥 질의 결과를 사용자가 화면에서 직접 확인하지 못할 때 참/거짓 반환 결과로 데이터를 획득하는 기법을 Blind SQL Injection 이라고 한다.
+
+### Blind SQL Injection
+
+```SQL
+# 첫 번째 글자 알아내기
+select * from user_table where uid='admin' and substr(upw,1,1)='a'--
+# admin 부터 사용자의 입력 값이며, substr 함수를 사용하여 user_table 테이블에서 uid가 admin 이고 upw의 첫 글자가 'a' 인지 확인한다. 실행 결과가 참이라면 'a'인 것이고, 거짓이라면 'a'가 아니다.
+
+# 두 번째 글자 알아내기
+select * from user_table where uid='admin' and substr(upw,2,1)='a'--
+# substr 함수 인자 중 두 번째 인자를 2로 변경하여 두 번째 글자를 알아낸다.
+```
+
 # 3. 대응방안
