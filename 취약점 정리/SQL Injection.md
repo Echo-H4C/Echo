@@ -32,10 +32,6 @@ UNION SQL Injection 취약점이 존재한다면 먼저 ' order by 1-- 쿼리문
 ' union select column_name from information_schema.columns WHERE table_name = '[TABLE_NAME]';-- 
 ```
 
-SQL Injection 및 기타 다양한 취약점의 payload 정보
-
-- https://github.com/swisskyrepo/PayloadsAllTheThings
-
 ## 2.2. Blind SQL Injection
 
 쿼리문의 질의 실행 결과가 에러 메시지나 에러 코드 확인 등의 방법으로 확인되지 않으나 주입된 쿼리문이 실행된 결과가 참일 때와 거짓일 때의 사용자 측에 출력되는 결괏값이 가변된다고 판단되는 경우 발생할 가능성이 있다고 볼 수 있다. 위에서 살펴보았던 쿼리문처럼 조회하는 쿼리문을 직접적으로 주입하는 것이 아니라 조회된 결괏값의 일부와 특정 문자(예를 들면 알파벳이나 특수문자 등)를 비교하는 쿼리문을 주입하여 한 글자씩 알아내는 방법이 일반적이다.
@@ -86,5 +82,14 @@ for idx in range(0, 20):
             break
 print(f"Password is {password}")
 ```
+SQL Injection 및 기타 다양한 취약점의 payload 정보
+
+- https://github.com/swisskyrepo/PayloadsAllTheThings
 
 # 3. 대응방안
+
+## 3.1. 입력 값 필터링
+
+## 3.2. PreparedStatement 적용
+
+## 3.3. ORM 적용
