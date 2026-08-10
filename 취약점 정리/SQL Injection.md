@@ -119,4 +119,6 @@ PreparedStatement와 마찬가지로 SQL Injection 방어를 위한 기능은 �
 
 # 4. 참고
 
+- https://github.com/swisskyrepo/PayloadsAllTheThings
+
 - https://www.skshieldus.com/report/eqstInsight/rt2604.html
