@@ -99,3 +99,11 @@ SQL Injection 및 기타 다양한 취약점의 payload 정보
 SQL Injection을 방어하기 위해 존재하는 기능은 아니지만 그 기능의 특성 덕분에 SQL Injection을 방어할 수 있다. PreparedStatement는 서버에서 실행될 쿼리문에 바인딩 문자(?)를 입력하고, 쿼리문이 실행될 때 이 바인딩 문자에 사용자 입력 값을 바인딩한다. 그러면 쿼리문에 포함되는 사용자의 입력 값은 컬럼명이나 명령어 등의 쿼리문의 일부로 인식되는 것이 아니라 일반적인 문자열로 인식되기 때문에 악의적인 쿼리문을 주입하여도 쿼리문이 실행되지 않는다.
 
 ## 3.3. ORM 적용
+
+다만, ORM도 공격 가능한 사례가 존재하므로 100퍼센트 방어할 수는 없다.
+
+- 참고 사례 : https://www.skshieldus.com/report/eqstInsight/rt2604.html (ORM Injection)
+
+# 4. 참고
+
+- https://www.skshieldus.com/report/eqstInsight/rt2604.html
