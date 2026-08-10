@@ -90,6 +90,10 @@ SQL Injection 및 기타 다양한 취약점의 payload 정보
 
 ## 3.1. 입력 값 필터링
 
+파라미터 입력 값 중 SQL Injection을 발생시킬 수 있는 ',",`,- 등의 특수문자를 필터링한다. 그리고 union, select, substr, sleep 등 SQL Injection에 사용되는 키워드도 같이 필터링하면 더 좋다.
+
+특수문자와 키워드 둘 다 필터링하는 것이 좋고, 서비스의 원활한 운영을 위해 둘 중 하나만 적용하는 것도 고려할 수 있다.
+
 ## 3.2. PreparedStatement 적용
 
 ## 3.3. ORM 적용
