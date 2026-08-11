@@ -9,6 +9,8 @@
 - Python : open
 - Java(JSP) : <jsp:include page="..." /> 태그 또는 RequestDispatcher.forward
 
+보통 PHP에서 자주 발생하는데, PHP의 include 계열 함수는 파일 읽기 + 코드 실행이 기본 동작이고, 타 언어는 보통 파일 읽기와 코드/모듈 호출이 엄격하게 분리되어 있기 때문이다. 그리고, PHP Wrapper 기능이 존재하여 이를 이용하여 필터링을 우회하는 경우가 발생하기 때문이다.
+
 # 2. 점검 방법
 
 # 3. 대응 방안
