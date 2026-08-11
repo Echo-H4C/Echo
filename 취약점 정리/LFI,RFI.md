@@ -22,6 +22,16 @@ file:///etc/passwd
 // file:// 옆에 /를 하나 더 붙이면 localhost를 의미한다.
 ```
 
+php://를 사용하면 PHP 자체 I/O 스트림에 접근할 수 있다. php://는 뒤에 붙이는 식별자에 따라 다양한 기능을 수행한다.
+
+- php://filter : 요청에 대한 응답을 실시간으로 변환해주는 기능으로, 요청에 대한 응답을 Base64로 변환하는 등의 기능을 수행한다.
+
+* php://fileter 사용 예시
+```
+// 요청에 대한 응답을 Base64로 인코딩
+php://filter/convert.base64-encode/resource=config.php
+```
+
 - php://input : 클라이언트가 서버로 전달하는 POST 요청의 Body 데이터 전체를 읽어오는 PHP의 내장 스트림. LFI 취약점이 발생하는 파라미터에 php://input 을 입력하고, POST 요청 시 Body에 PHP의 시스템 명령을 실행시킬 수 있는 코드(<?php system('ls')?>)를 전달하면 시스템 명령어가 실행되어 사용자에게 응답으로 반환된다.
 
 * php://input 예시
