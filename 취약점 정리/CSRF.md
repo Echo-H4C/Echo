@@ -69,6 +69,18 @@ location.replace('http://bank.dreamhack.io/sendmoney?to=Dreamhack&amount=1337');
 
 서버 측에서 사용자의 세션 또는 임의의 난수를 생성하고, 이를 사용자에 대한 응답 HTML 문서에 hidden 타입의 input 태그에 심어둔다. 그리고 서버 측으로 요청이 전달될 때, 파라미터 값으로 Token 값을 받아 서버 측에서 검증하고, 검증에 통과하면 해당 기능을 실행하도록 한다. 이 Token은 서버 측에서 생성되는 임의의 값으로 공격자가 알아내기 어렵기 때문에 공격자가 작성한 CSRF 스크립트에도 서버 측으로 보내는 요청에 Token 값을 포함한 요청을 보내도록 하는 스크립트를 작성할 수 없다. 그렇기 때문에 CSRF Token을 적용하면 공격자의 스크립트에 노출되더라도 기능이 실행되지 않고 검증에 의해 차단된다.
 
+## 3.3. SameSite 쿠키 옵션 적용
+
+SameSite는 크로스 사이트(Cross-Site) 요청 시 쿠키의 전송 여부를 제어하여 CSRF(Cross-Site Request Forgery) 공격을 방어하기 위해 사용하는 HTTP 응답 헤더(Set-Cookie)의 보안 속성이다. SameSite의 속성에 따라 3가지의 동작 모드로 구분된다.
+
+* SameSite=Strict
+
+- 동작 방식 : 동일 출처/동일 사이트(First-Party) 요청에만 쿠키를 전송한다.
+
+- 주요 특징 및 활용 : 외부 링크 클릭, 외부 사이트의 폼 전송 등 어떠한 크로스 사이트 요청에도 쿠키가 제외된다. 보안성이 가장 높지만, 외부 링크를 타고 들어올 때 로그인이 풀려 보이는 UX 저하가 발생할 수 있다.
+
+
+
 # 4. 참고
 
 - https://junhyunny.github.io/information/security/spring-boot/spring-security/cross-site-reqeust-forgery/
