@@ -73,6 +73,14 @@ location.replace('http://bank.dreamhack.io/sendmoney?to=Dreamhack&amount=1337');
 
 SameSite는 크로스 사이트(Cross-Site) 요청 시 쿠키의 전송 여부를 제어하여 CSRF(Cross-Site Request Forgery) 공격을 방어하기 위해 사용하는 HTTP 응답 헤더(Set-Cookie)의 보안 속성이다. SameSite의 속성에 따라 3가지의 동작 모드로 구분된다.
 
+SameSite 옵션이 CSRF를 방어하는 원리는 웹페이지A와 웹페이지B가 있다고 가정했을 때, 다음과 같다.
+
+1. 웹페이지A에서 로그인을 하면 사용자의 브라우저에 쿠키가 저장된다. 이 때, Set-Cookie 헤더에서 쿠키를 SameSite=Strict 옵션을 준다.
+
+2. 이 상태로 웹페이지B에 방문한다. 웹페이지B에는 공격자가 심은 웹페이지A의 비밀번호 변경 기능으로 요청을 보내도록 하는 스크립트가 심어져 있다.
+
+3. 사용자가 웹페이지B에 심어진 스크립트에 노출되고, 웹페이지A로 비밀번호 변경 요청을 보내게 된다. 이 때, SameSite=Strict 로 지정되어 있어 동일 사이트/동일 출처가 아니라면 이 옵션이 지정된 쿠키는 포함하지 않은 상태로 요청이 전달되므로 비밀번호 변경 요청은 불가하게 된다.
+
 ### SameSite=Strict
 
 - 동작 방식 : 동일 출처/동일 사이트(First-Party) 요청에만 쿠키를 전송한다.
